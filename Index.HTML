@@ -1,0 +1,367 @@
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f7">
+  <meta name="description" content="Sistema de gestão escolar do Instituto Técnico Comercial de Luanda">
+  <title>ITCL — Gestão Escolar</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="#" data-page="dashboard">
+      <span class="brand-logo">I</span>
+      <span class="brand-copy">
+        <strong>ITCL</strong>
+        <small>Gestão Escolar</small>
+      </span>
+    </a>
+
+    <div class="nav-caption">GESTÃO ESCOLAR</div>
+
+    <nav class="navigation">
+      <button class="nav-item active" data-page="dashboard">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg>
+        <span>Painel geral</span>
+      </button>
+      <button class="nav-item" data-page="students">
+        <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2 21v-2a7 7 0 0 1 14 0v2M16 4a4 4 0 0 1 0 8m2 3a5 5 0 0 1 4 5v1"/></svg>
+        <span>Alunos</span><span class="nav-count" id="studentBadge">0</span>
+      </button>
+      <button class="nav-item" data-page="teachers">
+        <svg viewBox="0 0 24 24"><path d="M12 3 2 8l10 5 10-5-10-5Z"/><path d="M6 10v6c4 4 8 4 12 0v-6M22 8v7"/></svg>
+        <span>Professores</span>
+      </button>
+      <button class="nav-item" data-page="subjects">
+        <svg viewBox="0 0 24 24"><path d="M4 3h12l4 4v14H4z"/><path d="M16 3v5h4M8 12h8M8 16h8"/></svg>
+        <span>Disciplinas</span>
+      </button>
+      <button class="nav-item" data-page="classes">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 10v10M15 10v10"/></svg>
+        <span>Turmas e salas</span>
+      </button>
+    </nav>
+
+    <div class="nav-caption">ÁREA ACADÉMICA</div>
+
+    <nav class="navigation">
+      <button class="nav-item" data-page="grades">
+        <svg viewBox="0 0 24 24"><path d="m4 12 5 5L20 6"/></svg>
+        <span>Notas</span>
+      </button>
+      <button class="nav-item" data-page="attendance">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        <span>Presenças</span>
+      </button>
+      <button class="nav-item" data-page="schedule">
+        <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M8 14h3M8 17h6"/></svg>
+        <span>Horários</span>
+      </button>
+    </nav>
+
+    <div class="nav-caption">SISTEMA</div>
+
+    <nav class="navigation">
+      <button class="nav-item" data-page="reports">
+        <svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
+        <span>Relatórios</span>
+      </button>
+      <button class="nav-item" data-page="settings">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1 1.4 1.1-1.5 2.6-1.7-.7a8 8 0 0 1-2 .9l-.3 1.8h-3l-.3-1.8a8 8 0 0 1-2-.9l-1.7.7-1.5-2.6L8.3 15a8 8 0 0 1 0-2l-1.4-1.1 1.5-2.6 1.7.7a8 8 0 0 1 2-.9l.3-1.8h3l.3 1.8a8 8 0 0 1 2 .9l1.7-.7 1.5 2.6-1.4 1.1a8 8 0 0 1-.1 2Z" transform="translate(-1 -2)"/></svg>
+        <span>Configurações</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="online-dot"></div>
+      <div><strong>Sistema activo</strong><small>Armazenamento local</small></div>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="app-shell">
+    <header class="topbar">
+      <button class="icon-button mobile-menu" id="menuToggle" aria-label="Abrir menu">
+        <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+
+      <div class="breadcrumb">
+        <span>ITCL</span><span class="breadcrumb-separator">/</span>
+        <strong id="pageTitle">Painel geral</strong>
+      </div>
+
+      <div class="topbar-actions">
+        <div class="current-date" id="currentDate"></div>
+        <button class="icon-button" id="themeToggle" title="Alternar aparência" aria-label="Alternar aparência">
+          <svg viewBox="0 0 24 24"><path d="M20 15A8 8 0 0 1 9 4a8 8 0 1 0 11 11Z"/></svg>
+        </button>
+        <div class="profile-avatar">IT</div>
+      </div>
+    </header>
+
+    <main class="content">
+
+      <!-- PAINEL GERAL -->
+      <section class="page active" id="page-dashboard">
+        <div class="welcome-row">
+          <div>
+            <div class="eyebrow">INSTITUTO TÉCNICO COMERCIAL DE LUANDA</div>
+            <h1>Bom dia, <span class="gradient-text">ITCL.</span></h1>
+            <p class="subheading">Aqui está o resumo da actividade escolar.</p>
+          </div>
+          <button class="button button-primary" data-open-page="students">
+            <span class="button-plus">+</span> Novo aluno
+          </button>
+        </div>
+
+        <div class="stat-grid">
+          <article class="stat-card">
+            <div class="stat-top"><span>Total de alunos</span><span class="stat-symbol blue-symbol">A</span></div>
+            <strong id="totalStudents">0</strong>
+            <small>Estudantes registados</small>
+          </article>
+          <article class="stat-card">
+            <div class="stat-top"><span>Professores</span><span class="stat-symbol purple-symbol">P</span></div>
+            <strong id="totalTeachers">0</strong>
+            <small>Docentes registados</small>
+          </article>
+          <article class="stat-card">
+            <div class="stat-top"><span>Disciplinas</span><span class="stat-symbol orange-symbol">D</span></div>
+            <strong id="totalSubjects">0</strong>
+            <small>Disciplinas cadastradas</small>
+          </article>
+          <article class="stat-card">
+            <div class="stat-top"><span>Turmas</span><span class="stat-symbol green-symbol">T</span></div>
+            <strong id="totalClasses">0</strong>
+            <small>Turmas identificadas</small>
+          </article>
+        </div>
+
+        <div class="dashboard-grid">
+          <article class="surface-card">
+            <div class="section-heading">
+              <div><h2>Visão académica</h2><p>Distribuição de alunos por classe</p></div>
+              <span class="subtle-tag">Ano lectivo <span id="dashboardYear">2026</span></span>
+            </div>
+            <div class="chart-area" id="classChart"></div>
+          </article>
+
+          <article class="surface-card">
+            <div class="section-heading"><div><h2>Acesso rápido</h2><p>Operações frequentes</p></div></div>
+            <div class="quick-links">
+              <button class="quick-link" data-open-page="students"><span class="quick-icon blue-symbol">+</span><span><strong>Cadastrar aluno</strong><small>Adicionar estudante</small></span><span class="chevron">›</span></button>
+              <button class="quick-link" data-open-page="teachers"><span class="quick-icon purple-symbol">+</span><span><strong>Cadastrar professor</strong><small>Adicionar docente</small></span><span class="chevron">›</span></button>
+              <button class="quick-link" data-open-page="subjects"><span class="quick-icon orange-symbol">+</span><span><strong>Nova disciplina</strong><small>Organizar matérias</small></span><span class="chevron">›</span></button>
+              <button class="quick-link" data-open-page="grades"><span class="quick-icon green-symbol">+</span><span><strong>Lançar notas</strong><small>Registar avaliação</small></span><span class="chevron">›</span></button>
+            </div>
+          </article>
+        </div>
+
+        <article class="surface-card">
+          <div class="section-heading">
+            <div><h2>Alunos recentes</h2><p>Os últimos estudantes registados</p></div>
+            <button class="text-button" data-open-page="students">Ver todos <span>→</span></button>
+          </div>
+          <div class="table-wrap">
+            <table><thead><tr><th>Aluno</th><th>Processo</th><th>Classe</th><th>Turma</th><th>Turno</th></tr></thead><tbody id="recentStudents"></tbody></table>
+          </div>
+        </article>
+      </section>
+
+      <!-- ALUNOS -->
+      <section class="page" id="page-students">
+        <div class="page-heading">
+          <div><div class="eyebrow">GESTÃO DE ESTUDANTES</div><h1>Alunos</h1><p class="subheading">Todos os dados dos estudantes num só lugar.</p></div>
+          <button class="button button-primary" id="addStudent">+ Adicionar aluno</button>
+        </div>
+
+        <article class="surface-card form-card" id="studentPanel" hidden>
+          <div class="section-heading"><div><h2 id="studentFormTitle">Novo aluno</h2><p>Preenche os campos necessários.</p></div><button class="icon-button" data-close="studentPanel" aria-label="Fechar">×</button></div>
+          <form id="studentForm" class="form-grid">
+            <input type="hidden" id="studentId">
+            <label>Nome completo *<input id="sName" required maxlength="120" placeholder="Nome do estudante"></label>
+            <label>Número de processo *<input id="sNumber" required maxlength="40" placeholder="Ex.: ITCL-2026-001"></label>
+            <label>Bilhete de identidade<input id="sBI" maxlength="40"></label>
+            <label>Telefone<input id="sPhone" type="tel" maxlength="30"></label>
+            <label>E-mail<input id="sEmail" type="email" maxlength="120"></label>
+            <label>Classe *<select id="sClass" required><option value="">Seleccionar classe</option><option>10.ª</option><option>11.ª</option><option>12.ª</option><option>13.ª</option></select></label>
+            <label>Turma *<input id="sGroup" required placeholder="Ex.: A"></label>
+            <label>Sala *<input id="sRoom" required placeholder="Ex.: Sala 04"></label>
+            <label>Curso<input id="sCourse" placeholder="Ex.: Informática"></label>
+            <label>Turno<select id="sShift"><option value="">Seleccionar turno</option><option>Manhã</option><option>Tarde</option><option>Noite</option></select></label>
+            <label>Data de nascimento<input id="sBirth" type="date"></label>
+            <label>Estado<select id="sStatus"><option>Activo</option><option>Transferido</option><option>Inactivo</option></select></label>
+            <label class="full-width">Morada / observações<textarea id="sNote" rows="2" placeholder="Informações adicionais"></textarea></label>
+            <div class="form-actions full-width"><button type="button" class="button button-secondary" data-close="studentPanel">Cancelar</button><button class="button button-primary">Guardar aluno</button></div>
+          </form>
+        </article>
+
+        <article class="surface-card">
+          <div class="toolbar">
+            <div class="search-box"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/></svg><input id="studentSearch" placeholder="Pesquisar nome, processo, turma..."></div>
+            <select class="filter-select" id="classFilter"><option value="">Todas as classes</option><option>10.ª</option><option>11.ª</option><option>12.ª</option><option>13.ª</option></select>
+            <button class="button button-secondary" id="exportStudents">Exportar CSV</button>
+          </div>
+          <div class="table-wrap"><table><thead><tr><th>Nome</th><th>Processo</th><th>Classe</th><th>Turma</th><th>Sala</th><th>Estado</th><th>Acções</th></tr></thead><tbody id="studentsTable"></tbody></table></div>
+          <div class="table-footer" id="studentCount">0 estudantes</div>
+        </article>
+      </section>
+
+      <!-- PROFESSORES -->
+      <section class="page" id="page-teachers">
+        <div class="page-heading"><div><div class="eyebrow">RECURSOS HUMANOS</div><h1>Professores</h1><p class="subheading">Organização do corpo docente.</p></div><button class="button button-primary" id="addTeacher">+ Adicionar professor</button></div>
+
+        <article class="surface-card form-card" id="teacherPanel" hidden>
+          <div class="section-heading"><div><h2 id="teacherFormTitle">Novo professor</h2><p>Dados profissionais e de contacto.</p></div><button class="icon-button" data-close="teacherPanel">×</button></div>
+          <form id="teacherForm" class="form-grid">
+            <input type="hidden" id="teacherId">
+            <label>Nome completo *<input id="tName" required></label>
+            <label>Disciplina principal *<input id="tSubject" required></label>
+            <label>Número de funcionário<input id="tNumber"></label>
+            <label>Telefone<input id="tPhone" type="tel"></label>
+            <label>E-mail<input id="tEmail" type="email"></label>
+            <label>Estado<select id="tStatus"><option>Activo</option><option>Inactivo</option></select></label>
+            <div class="form-actions full-width"><button type="button" class="button button-secondary" data-close="teacherPanel">Cancelar</button><button class="button button-primary">Guardar professor</button></div>
+          </form>
+        </article>
+
+        <article class="surface-card">
+          <div class="toolbar"><div class="search-box"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/></svg><input id="teacherSearch" placeholder="Pesquisar professor..."></div><button class="button button-secondary" id="exportTeachers">Exportar CSV</button></div>
+          <div class="table-wrap"><table><thead><tr><th>Professor</th><th>Disciplina</th><th>N.º funcionário</th><th>Telefone</th><th>E-mail</th><th>Estado</th><th>Acções</th></tr></thead><tbody id="teachersTable"></tbody></table></div>
+        </article>
+      </section>
+
+      <!-- DISCIPLINAS -->
+      <section class="page" id="page-subjects">
+        <div class="page-heading"><div><div class="eyebrow">PLANO CURRICULAR</div><h1>Disciplinas</h1><p class="subheading">Gere as matérias, cargas horárias e professores responsáveis.</p></div><button class="button button-primary" id="addSubject">+ Nova disciplina</button></div>
+
+        <div class="stat-grid stat-grid-three">
+          <article class="stat-card"><div class="stat-top"><span>Total de disciplinas</span><span class="stat-symbol blue-symbol">D</span></div><strong id="subjectTotal">0</strong><small>Matérias registadas</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Disciplinas activas</span><span class="stat-symbol green-symbol">✓</span></div><strong id="subjectActive">0</strong><small>Disponíveis no plano</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Carga horária semanal</span><span class="stat-symbol purple-symbol">H</span></div><strong id="subjectHoursTotal">0 h</strong><small>Total de horas configuradas</small></article>
+        </div>
+
+        <article class="surface-card form-card" id="subjectPanel" hidden>
+          <div class="section-heading"><div><h2 id="subjectFormTitle">Nova disciplina</h2><p>Configura os dados curriculares.</p></div><button class="icon-button" data-close="subjectPanel">×</button></div>
+          <form id="subjectForm" class="form-grid">
+            <input type="hidden" id="subjectId">
+            <label>Nome da disciplina *<input id="subjectName" required placeholder="Ex.: Matemática"></label>
+            <label>Código da disciplina<input id="subjectCode" placeholder="Ex.: MAT101"></label>
+            <label>Classe *<select id="subjectClass" required><option value="">Seleccionar classe</option><option>10.ª</option><option>11.ª</option><option>12.ª</option><option>13.ª</option></select></label>
+            <label>Professor responsável<select id="subjectTeacher"><option value="">Sem professor atribuído</option></select></label>
+            <label>Carga horária semanal<input id="subjectHours" type="number" min="0" max="60" step="1" value="4"></label>
+            <label>Estado<select id="subjectStatus"><option>Activa</option><option>Inactiva</option></select></label>
+            <label class="full-width">Descrição<textarea id="subjectDescription" rows="2" placeholder="Objectivos ou notas da disciplina"></textarea></label>
+            <div class="form-actions full-width"><button type="button" class="button button-secondary" data-close="subjectPanel">Cancelar</button><button class="button button-primary">Guardar disciplina</button></div>
+          </form>
+        </article>
+
+        <article class="surface-card">
+          <div class="toolbar"><div class="search-box"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/></svg><input id="subjectSearch" placeholder="Pesquisar disciplina ou código..."></div><select id="subjectClassFilter" class="filter-select"><option value="">Todas as classes</option><option>10.ª</option><option>11.ª</option><option>12.ª</option><option>13.ª</option></select><button class="button button-secondary" id="exportSubjects">Exportar CSV</button></div>
+          <div class="table-wrap"><table><thead><tr><th>Disciplina</th><th>Código</th><th>Classe</th><th>Professor</th><th>Carga horária</th><th>Estado</th><th>Acções</th></tr></thead><tbody id="subjectsTable"></tbody></table></div>
+        </article>
+      </section>
+
+      <!-- TURMAS -->
+      <section class="page" id="page-classes">
+        <div class="page-heading"><div><div class="eyebrow">ORGANIZAÇÃO ESCOLAR</div><h1>Turmas e salas</h1><p class="subheading">Distribuição dos estudantes por classe, turma e turno.</p></div></div>
+        <div class="stat-grid stat-grid-three" id="classCards"></div>
+        <article class="surface-card"><div class="section-heading"><div><h2>Turmas identificadas</h2><p>Resumo baseado nos alunos cadastrados.</p></div></div><div class="table-wrap"><table><thead><tr><th>Classe</th><th>Turma</th><th>Sala</th><th>Turno</th><th>Total de alunos</th></tr></thead><tbody id="classesTable"></tbody></table></div></article>
+      </section>
+
+      <!-- NOTAS -->
+      <section class="page" id="page-grades">
+        <div class="page-heading"><div><div class="eyebrow">AVALIAÇÃO ESCOLAR</div><h1>Notas</h1><p class="subheading">Lançamento e consulta dos resultados académicos.</p></div><button class="button button-primary" id="addGrade">+ Lançar nota</button></div>
+        <article class="surface-card form-card" id="gradePanel" hidden>
+          <div class="section-heading"><div><h2>Nova avaliação</h2><p>Regista a nota do estudante.</p></div><button class="icon-button" data-close="gradePanel">×</button></div>
+          <form id="gradeForm" class="form-grid">
+            <label class="full-width">Aluno *<select id="gStudent" required></select></label>
+            <label>Disciplina *<select id="gSubject" required></select></label>
+            <label>Trimestre *<select id="gTerm" required><option value="">Seleccionar</option><option>1.º Trimestre</option><option>2.º Trimestre</option><option>3.º Trimestre</option></select></label>
+            <label>Nota (0–20) *<input id="gValue" type="number" min="0" max="20" step="0.1" required></label>
+            <label>Data da avaliação<input id="gDate" type="date"></label>
+            <div class="form-actions full-width"><button type="button" class="button button-secondary" data-close="gradePanel">Cancelar</button><button class="button button-primary">Guardar nota</button></div>
+          </form>
+        </article>
+        <article class="surface-card"><div class="toolbar"><div class="search-box"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/></svg><input id="gradeSearch" placeholder="Pesquisar aluno ou disciplina..."></div><button class="button button-secondary" id="exportGrades">Exportar CSV</button></div><div class="table-wrap"><table><thead><tr><th>Aluno</th><th>Disciplina</th><th>Trimestre</th><th>Nota</th><th>Resultado</th><th>Data</th><th>Acções</th></tr></thead><tbody id="gradesTable"></tbody></table></div></article>
+      </section>
+
+      <!-- PRESENÇAS -->
+      <section class="page" id="page-attendance">
+        <div class="page-heading"><div><div class="eyebrow">CONTROLO DIÁRIO</div><h1>Presenças</h1><p class="subheading">Regista presenças, faltas e atrasos.</p></div><button class="button button-primary" id="addAttendance">+ Registar presença</button></div>
+        <article class="surface-card form-card" id="attendancePanel" hidden><div class="section-heading"><div><h2>Registo de presença</h2><p>Selecciona o aluno e o estado.</p></div><button class="icon-button" data-close="attendancePanel">×</button></div>
+          <form id="attendanceForm" class="form-grid">
+            <label class="full-width">Aluno *<select id="aStudent" required></select></label>
+            <label>Data *<input id="aDate" type="date" required></label>
+            <label>Estado *<select id="aStatus"><option>Presente</option><option>Falta</option><option>Atraso</option></select></label>
+            <label class="full-width">Observação<textarea id="aNote" rows="2"></textarea></label>
+            <div class="form-actions full-width"><button type="button" class="button button-secondary" data-close="attendancePanel">Cancelar</button><button class="button button-primary">Guardar registo</button></div>
+          </form>
+        </article>
+        <article class="surface-card"><div class="toolbar"><div class="search-box"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/></svg><input id="attendanceSearch" placeholder="Pesquisar aluno..."></div><button class="button button-secondary" id="exportAttendance">Exportar CSV</button></div><div class="table-wrap"><table><thead><tr><th>Aluno</th><th>Data</th><th>Estado</th><th>Observação</th><th>Acções</th></tr></thead><tbody id="attendanceTable"></tbody></table></div></article>
+      </section>
+
+      <!-- HORÁRIOS -->
+      <section class="page" id="page-schedule">
+        <div class="page-heading"><div><div class="eyebrow">PLANEAMENTO ESCOLAR</div><h1>Horários</h1><p class="subheading">Organiza as aulas por dia, turma e professor.</p></div><button class="button button-primary" id="addSchedule">+ Adicionar aula</button></div>
+        <article class="surface-card form-card" id="schedulePanel" hidden><div class="section-heading"><div><h2>Nova aula</h2><p>Define o período e a disciplina.</p></div><button class="icon-button" data-close="schedulePanel">×</button></div>
+          <form id="scheduleForm" class="form-grid">
+            <label>Dia *<select id="hDay" required><option value="">Seleccionar dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option></select></label>
+            <label>Classe *<select id="hClass" required><option>10.ª</option><option>11.ª</option><option>12.ª</option><option>13.ª</option></select></label>
+            <label>Turma *<input id="hGroup" required></label>
+            <label>Disciplina *<select id="hSubject" required></select></label>
+            <label>Professor<input id="hTeacher"></label>
+            <label>Sala<input id="hRoom"></label>
+            <label>Hora de início *<input id="hStart" type="time" required></label>
+            <label>Hora de fim *<input id="hEnd" type="time" required></label>
+            <div class="form-actions full-width"><button type="button" class="button button-secondary" data-close="schedulePanel">Cancelar</button><button class="button button-primary">Guardar aula</button></div>
+          </form>
+        </article>
+        <article class="surface-card"><div class="toolbar"><select id="scheduleDayFilter" class="filter-select"><option value="">Todos os dias</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option></select><select id="scheduleClassFilter" class="filter-select"><option value="">Todas as classes</option><option>10.ª</option><option>11.ª</option><option>12.ª</option><option>13.ª</option></select></div><div class="table-wrap"><table><thead><tr><th>Dia</th><th>Hora</th><th>Classe / turma</th><th>Disciplina</th><th>Professor</th><th>Sala</th><th>Acções</th></tr></thead><tbody id="scheduleTable"></tbody></table></div></article>
+      </section>
+
+      <!-- RELATÓRIOS -->
+      <section class="page" id="page-reports">
+        <div class="page-heading"><div><div class="eyebrow">ANÁLISE E DOCUMENTAÇÃO</div><h1>Relatórios</h1><p class="subheading">Consulta e exporta os dados escolares.</p></div><button class="button button-primary" id="backup">Criar cópia de segurança</button></div>
+        <div class="stat-grid stat-grid-three" id="reportCards"></div>
+        <article class="surface-card"><div class="section-heading"><div><h2>Exportar dados</h2><p>Guarda os registos em formato CSV.</p></div></div>
+          <div class="export-list">
+            <div class="export-row"><div><strong>Lista de alunos</strong><small>Dados académicos e contacto</small></div><button class="button button-secondary" id="reportStudents">Exportar CSV</button></div>
+            <div class="export-row"><div><strong>Lista de professores</strong><small>Dados do corpo docente</small></div><button class="button button-secondary" id="reportTeachers">Exportar CSV</button></div>
+            <div class="export-row"><div><strong>Disciplinas</strong><small>Plano curricular e carga horária</small></div><button class="button button-secondary" id="reportSubjects">Exportar CSV</button></div>
+            <div class="export-row"><div><strong>Notas</strong><small>Resultados das avaliações</small></div><button class="button button-secondary" id="reportGrades">Exportar CSV</button></div>
+            <div class="export-row"><div><strong>Presenças</strong><small>Registos de assiduidade</small></div><button class="button button-secondary" id="reportAttendance">Exportar CSV</button></div>
+          </div>
+        </article>
+        <article class="surface-card"><div class="section-heading"><div><h2>Imprimir relatório</h2><p>Podes imprimir a página actualmente aberta.</p></div><button class="button button-secondary" id="printReport">Imprimir página</button></div></article>
+      </section>
+
+      <!-- CONFIGURAÇÕES -->
+      <section class="page" id="page-settings">
+        <div class="page-heading"><div><div class="eyebrow">PREFERÊNCIAS DO SISTEMA</div><h1>Configurações</h1><p class="subheading">Personaliza a instituição e a aparência.</p></div></div>
+        <article class="surface-card"><div class="section-heading"><div><h2>Dados da instituição</h2><p>Informações apresentadas no sistema.</p></div></div>
+          <form id="settingsForm" class="form-grid">
+            <label class="full-width">Nome da instituição<input id="schoolName" required value="Instituto Técnico Comercial de Luanda"></label>
+            <label>Sigla<input id="schoolShort" required value="ITCL"></label>
+            <label>Ano lectivo<input id="schoolYear" required value="2026"></label>
+            <div class="form-actions full-width"><button class="button button-primary">Guardar alterações</button></div>
+          </form>
+        </article>
+        <article class="surface-card"><div class="section-heading"><div><h2>Dados e privacidade</h2><p>Faz cópias de segurança para não perder os registos.</p></div></div>
+          <div class="settings-buttons"><button class="button button-secondary" id="backupSettings">Criar cópia JSON</button><label class="button button-secondary file-button">Restaurar cópia JSON<input id="restore" type="file" accept=".json,application/json" hidden></label><button class="button button-danger" id="clearData">Apagar todos os dados</button></div>
+          <p class="helper-text">Os dados desta versão ficam guardados no navegador do dispositivo. Não são sincronizados automaticamente entre computadores.</p>
+        </article>
+      </section>
+
+    </main>
+
+    <footer class="footer"><span>© <span id="footerYear"></span> <strong>ITCL</strong> — Gestão Escolar</span><span>Desenvolvido para organização académica</span></footer>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
